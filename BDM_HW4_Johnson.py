@@ -51,7 +51,7 @@ if __name__ == "__main__":
     #adder helper function
     def add(x):
         if(',' in x[0]):
-            a = f'"{x[0]}"'
+            a = "{}".format(x[0])
             return (a.strip(), x[1],x[2], x[3],x[4])
         else:
             return (x[0], x[1],x[2], x[3],x[4])
