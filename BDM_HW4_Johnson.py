@@ -60,4 +60,4 @@ if __name__ == "__main__":
     
     columns = ["Product","year","count","count_company","percentage"]
     finalResult = rdd.toDF(columns)
-    finalResult.rdd.map(lambda x: ",".join(map(str, x))).coalesce(1).saveAsTextFile(outputPath)
+    finalResult.rdd.map(lambda x: ",".join(map(str, x))).saveAsTextFile(outputPath)
