@@ -31,7 +31,7 @@ if __name__ == "__main__":
                          ])
     #transformations   
     complaints = spark.read.option("header","true").csv(path=inputPath, schema=schema)
-    result1DF = complaints.filter("product is not null").filter("date_received is not null").filter("company is not null").filter("issue is not null").select(lower("product").alias("product"), year("date_received").alias("year"), "issue", "company")
+    result1DF = complaints.filter("product is not null").filter("date_received is not null").filter("company is not null").filter("issue is not null").select(lower(col("product")).alias("product"), year("date_received").alias("year"), "issue", "company")
     totalComplainnts = result1DF.groupBy("Product", "year").count().select(col("Product").alias("complaintsProduct"), col("year").alias("complaint_year"), col("count").alias("count"))
     totalCompanies = result1DF.groupBy("Product", "year", "company").count().select("Product", "year", col("count").alias("count_company"))
     inner = totalComplainnts.join(totalCompanies, (totalComplainnts.complaintsProduct == totalCompanies.Product) & (totalComplainnts.complaint_year == totalCompanies.year),how='inner').select("Product", "year", "count", "count_company")
