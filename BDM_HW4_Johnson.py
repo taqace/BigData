@@ -10,7 +10,7 @@ if __name__ == "__main__":
     sc = spark.sparkContext
     #input/output paths
     inputPath = sys.argv[1]
-    outputPath = sys.argv[2]
+    outputPath = sys.argv[2] if len(sys.argv)>2 else 'output'
     #csv schema
     schema = StructType([StructField("date_received",TimestampType(),nullable=True),
                          StructField("product",StringType(),True), 
